@@ -162,9 +162,4 @@ MIT License © 2025 Suren Kotian
 
 ```
 
----
 
-If you want, I can **also make a “copy-paste-ready backend + frontend usage example”** to go under the **Usage** section — so anyone can literally run Bites in minutes.  
-
-Do you want me to do that?
-```
