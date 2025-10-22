@@ -1,0 +1,5 @@
+newsapi-python
+python-dotenv
+# For local/production model use, also install:
+# transformers
+# torch

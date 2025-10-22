@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      NEWSAPI_KEY: ci_dummy_key
+      SKIP_MODEL: "1"   # prevent heavy model download during CI
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install lightweight dependencies
+        run: pip install -r requirements.txt
+      - name: Syntax check
+        run: python -m compileall .
+      - name: Smoke import test
+        run: |
+          python - <<'PY'
+          import importlib.util, sys
+          spec = importlib.util.spec_from_file_location("news_fetcher","backend/app/news_fetcher.py")
+          m = importlib.util.module_from_spec(spec)
+          spec.loader.exec_module(m)
+          print("news_fetcher import OK")
+          PY
